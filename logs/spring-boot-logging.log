@@ -1,0 +1,23 @@
+2019/01/07-16:34 [main] INFO  com.example.nba.NbaApplicationTests- Starting NbaApplicationTests on xiaomiPro with PID 460 (started by 10905 in D:\Aworkspace\idea\workspace\ssm\nba)
+2019/01/07-16:34 [main] INFO  com.example.nba.NbaApplicationTests- No active profile set, falling back to default profiles: default
+2019/01/07-16:34 [main] INFO  org.springframework.scheduling.concurrent.ThreadPoolTaskExecutor- Initializing ExecutorService 'applicationTaskExecutor'
+2019/01/07-16:34 [main] WARN  org.springframework.boot.autoconfigure.thymeleaf.ThymeleafAutoConfiguration$DefaultTemplateResolverConfiguration- Cannot find template location: classpath:/templates/ (please add some templates or check your Thymeleaf configuration)
+2019/01/07-16:34 [main] WARN  org.thymeleaf.templatemode.TemplateMode- [THYMELEAF][main] Template Mode 'HTML5' is deprecated. Using Template Mode 'HTML' instead.
+2019/01/07-16:34 [main] INFO  com.example.nba.NbaApplicationTests- Started NbaApplicationTests in 3.838 seconds (JVM running for 4.861)
+2019/01/07-16:34 [main] INFO  com.example.nba.aop.ServiceAOP- 在==>>com.example.nba.service.PlayerService类里面使用AOP环绕增强==
+2019/01/07-16:34 [main] INFO  com.example.nba.aop.ServiceAOP- *环绕增强*调用【PlayerService】的【 getAllPlayers】方法。方法入参【[{startPage=1, pageSize=6}]】
+2019/01/07-16:34 [main] INFO  com.example.nba.aop.ServiceAOP- *前置增强*调用了【PlayerService】的【getAllPlayers】的方法，方法入参为【[{startPage=1, pageSize=6}]】
+2019/01/07-16:34 [main] INFO  com.example.nba.aop.ServiceAOP- 请求的地址URL : http://localhost
+2019/01/07-16:34 [main] INFO  com.example.nba.aop.ServiceAOP- 请求的方式HTTP_METHOD : 
+2019/01/07-16:34 [main] INFO  com.example.nba.aop.ServiceAOP- 请求的IP : 127.0.0.1
+2019/01/07-16:34 [main] INFO  com.example.nba.aop.ServiceAOP- 请求的全类名 : com.example.nba.service.PlayerService.getAllPlayers
+2019/01/07-16:34 [main] INFO  com.example.nba.aop.ServiceAOP- 请求的参数(数组形式) : [{startPage=1, pageSize=6}]
+2019/01/07-16:34 [main] INFO  com.zaxxer.hikari.HikariDataSource- HikariPool-1 - Starting...
+2019/01/07-16:34 [main] INFO  com.zaxxer.hikari.HikariDataSource- HikariPool-1 - Start completed.
+2019/01/07-16:34 [main] INFO  com.example.nba.aop.ServiceAOP- *环绕增强*调用 com.example.nba.service.PlayerService@58833798的【 getAllPlayers】方法。方法返回值【[Player(id=6, name=科怀-伦纳德, team=17, point=27.1, rebound=8.0, assist=2.9, picPath=null), Player(id=7, name=乔尔-恩比德, team=19, point=26.9, rebound=13.6, assist=3.5, picPath=null), Player(id=8, name=保罗-乔治, team=3, point=26.7, rebound=8.1, assist=4.1, picPath=null), Player(id=9, name=达米安-利拉德, team=7, point=26.7, rebound=4.8, assist=5.8, picPath=null), Player(id=10, name=扬尼斯-安特托昆博, team=16, point=26.3, rebound=12.6, assist=6.1, picPath=null), Player(id=11, name=德文-布克, team=15, point=25.5, rebound=3.9, assist=7.2, picPath=null)]】
+2019/01/07-16:34 [main] INFO  com.example.nba.aop.ServiceAOP- *环绕增强*执行finally【getAllPlayers】方法结束执行<<==。
+2019/01/07-16:34 [main] INFO  com.example.nba.aop.ServiceAOP- *最终增强*【getAllPlayers】方法结束执行。
+2019/01/07-16:34 [main] INFO  com.example.nba.aop.ServiceAOP- *后置增强*调用了【PlayerService】的【getAllPlayers】的方法，方法返回值【[Player(id=6, name=科怀-伦纳德, team=17, point=27.1, rebound=8.0, assist=2.9, picPath=null), Player(id=7, name=乔尔-恩比德, team=19, point=26.9, rebound=13.6, assist=3.5, picPath=null), Player(id=8, name=保罗-乔治, team=3, point=26.7, rebound=8.1, assist=4.1, picPath=null), Player(id=9, name=达米安-利拉德, team=7, point=26.7, rebound=4.8, assist=5.8, picPath=null), Player(id=10, name=扬尼斯-安特托昆博, team=16, point=26.3, rebound=12.6, assist=6.1, picPath=null), Player(id=11, name=德文-布克, team=15, point=25.5, rebound=3.9, assist=7.2, picPath=null)]】
+2019/01/07-16:34 [Thread-3] INFO  org.springframework.scheduling.concurrent.ThreadPoolTaskExecutor- Shutting down ExecutorService 'applicationTaskExecutor'
+2019/01/07-16:34 [Thread-3] INFO  com.zaxxer.hikari.HikariDataSource- HikariPool-1 - Shutdown initiated...
+2019/01/07-16:34 [Thread-3] INFO  com.zaxxer.hikari.HikariDataSource- HikariPool-1 - Shutdown completed.

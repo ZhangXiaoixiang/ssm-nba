@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.example.nba.dao.UserDao">
+  <resultMap id="BaseResultMap" type="com.example.nba.model.User">
+    <id column="id" jdbcType="INTEGER" property="id" />
+    <result column="user_name" jdbcType="VARCHAR" property="userName" />
+    <result column="user_pwd" jdbcType="VARCHAR" property="userPwd" />
+    <result column="user_age" jdbcType="INTEGER" property="userAge" />
+    <result column="user_sex" jdbcType="INTEGER" property="userSex" />
+    <result column="user_pic" jdbcType="VARCHAR" property="userPic" />
+    <result column="role_id" jdbcType="VARCHAR" property="roleId" />
+  </resultMap>
+  <select id="getUserByCondition" parameterType="map" resultMap="BaseResultMap">
+    select * from user
+    <where>
+      <if test="userName!=null and userPwd!=null">
+        user_name=#{userName} and user_pwd=#{userPwd}
+      </if>
+
+    </where>
+  </select>
+
+</mapper>

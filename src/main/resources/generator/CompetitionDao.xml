@@ -1,0 +1,260 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="generator.CompetitionDao">
+  <resultMap id="BaseResultMap" type="com.example.nba.model.Competition">
+    <id column="id" jdbcType="VARCHAR" property="id" />
+    <result column="host" jdbcType="INTEGER" property="host" />
+    <result column="guest" jdbcType="INTEGER" property="guest" />
+    <result column="time" jdbcType="VARCHAR" property="time" />
+    <result column="platform" jdbcType="VARCHAR" property="platform" />
+    <result column="host_ scores" jdbcType="INTEGER" property="hostScores" />
+    <result column="guest_ scores" jdbcType="INTEGER" property="guestScores" />
+    <result column="state" jdbcType="VARCHAR" property="state" />
+  </resultMap>
+  <sql id="Example_Where_Clause">
+    <where>
+      <foreach collection="oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause">
+    <where>
+      <foreach collection="example.oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List">
+    id, `host`, guest, `time`, platform, `host_ scores`, `guest_ scores`, `state`
+  </sql>
+  <select id="selectByExample" parameterType="generator.CompetitionExample" resultMap="BaseResultMap">
+    select
+    <if test="distinct">
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from competition
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null">
+      order by ${orderByClause}
+    </if>
+    <if test="limit != null">
+      <if test="offset != null">
+        limit ${offset}, ${limit}
+      </if>
+      <if test="offset == null">
+        limit ${limit}
+      </if>
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" parameterType="java.lang.String" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from competition
+    where id = #{id,jdbcType=VARCHAR}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String">
+    delete from competition
+    where id = #{id,jdbcType=VARCHAR}
+  </delete>
+  <delete id="deleteByExample" parameterType="generator.CompetitionExample">
+    delete from competition
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" keyColumn="id" keyProperty="id" parameterType="com.example.nba.model.Competition" useGeneratedKeys="true">
+    insert into competition (`host`, guest, `time`, 
+      platform, `host_ scores`, `guest_ scores`, 
+      `state`)
+    values (#{host,jdbcType=INTEGER}, #{guest,jdbcType=INTEGER}, #{time,jdbcType=VARCHAR}, 
+      #{platform,jdbcType=VARCHAR}, #{hostScores,jdbcType=INTEGER}, #{guestScores,jdbcType=INTEGER}, 
+      #{state,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" keyColumn="id" keyProperty="id" parameterType="com.example.nba.model.Competition" useGeneratedKeys="true">
+    insert into competition
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="host != null">
+        `host`,
+      </if>
+      <if test="guest != null">
+        guest,
+      </if>
+      <if test="time != null">
+        `time`,
+      </if>
+      <if test="platform != null">
+        platform,
+      </if>
+      <if test="hostScores != null">
+        `host_ scores`,
+      </if>
+      <if test="guestScores != null">
+        `guest_ scores`,
+      </if>
+      <if test="state != null">
+        `state`,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="host != null">
+        #{host,jdbcType=INTEGER},
+      </if>
+      <if test="guest != null">
+        #{guest,jdbcType=INTEGER},
+      </if>
+      <if test="time != null">
+        #{time,jdbcType=VARCHAR},
+      </if>
+      <if test="platform != null">
+        #{platform,jdbcType=VARCHAR},
+      </if>
+      <if test="hostScores != null">
+        #{hostScores,jdbcType=INTEGER},
+      </if>
+      <if test="guestScores != null">
+        #{guestScores,jdbcType=INTEGER},
+      </if>
+      <if test="state != null">
+        #{state,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="generator.CompetitionExample" resultType="java.lang.Long">
+    select count(*) from competition
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map">
+    update competition
+    <set>
+      <if test="record.id != null">
+        id = #{record.id,jdbcType=VARCHAR},
+      </if>
+      <if test="record.host != null">
+        `host` = #{record.host,jdbcType=INTEGER},
+      </if>
+      <if test="record.guest != null">
+        guest = #{record.guest,jdbcType=INTEGER},
+      </if>
+      <if test="record.time != null">
+        `time` = #{record.time,jdbcType=VARCHAR},
+      </if>
+      <if test="record.platform != null">
+        platform = #{record.platform,jdbcType=VARCHAR},
+      </if>
+      <if test="record.hostScores != null">
+        `host_ scores` = #{record.hostScores,jdbcType=INTEGER},
+      </if>
+      <if test="record.guestScores != null">
+        `guest_ scores` = #{record.guestScores,jdbcType=INTEGER},
+      </if>
+      <if test="record.state != null">
+        `state` = #{record.state,jdbcType=VARCHAR},
+      </if>
+    </set>
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map">
+    update competition
+    set id = #{record.id,jdbcType=VARCHAR},
+      `host` = #{record.host,jdbcType=INTEGER},
+      guest = #{record.guest,jdbcType=INTEGER},
+      `time` = #{record.time,jdbcType=VARCHAR},
+      platform = #{record.platform,jdbcType=VARCHAR},
+      `host_ scores` = #{record.hostScores,jdbcType=INTEGER},
+      `guest_ scores` = #{record.guestScores,jdbcType=INTEGER},
+      `state` = #{record.state,jdbcType=VARCHAR}
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.example.nba.model.Competition">
+    update competition
+    <set>
+      <if test="host != null">
+        `host` = #{host,jdbcType=INTEGER},
+      </if>
+      <if test="guest != null">
+        guest = #{guest,jdbcType=INTEGER},
+      </if>
+      <if test="time != null">
+        `time` = #{time,jdbcType=VARCHAR},
+      </if>
+      <if test="platform != null">
+        platform = #{platform,jdbcType=VARCHAR},
+      </if>
+      <if test="hostScores != null">
+        `host_ scores` = #{hostScores,jdbcType=INTEGER},
+      </if>
+      <if test="guestScores != null">
+        `guest_ scores` = #{guestScores,jdbcType=INTEGER},
+      </if>
+      <if test="state != null">
+        `state` = #{state,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where id = #{id,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.example.nba.model.Competition">
+    update competition
+    set `host` = #{host,jdbcType=INTEGER},
+      guest = #{guest,jdbcType=INTEGER},
+      `time` = #{time,jdbcType=VARCHAR},
+      platform = #{platform,jdbcType=VARCHAR},
+      `host_ scores` = #{hostScores,jdbcType=INTEGER},
+      `guest_ scores` = #{guestScores,jdbcType=INTEGER},
+      `state` = #{state,jdbcType=VARCHAR}
+    where id = #{id,jdbcType=VARCHAR}
+  </update>
+</mapper>

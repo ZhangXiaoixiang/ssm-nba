@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.example.nba.dao.PlayerRecordDao">
+    <resultMap id="BaseResultMap" type="com.example.nba.model.PlayerRecord">
+        <id column="id" jdbcType="INTEGER" property="id"/>
+        <result column="record_id" jdbcType="INTEGER" property="recordId"/>
+        <result column="name_ch" jdbcType="VARCHAR" property="nameCh"/>
+        <result column="player_rank" jdbcType="INTEGER" property="playerRank"/>
+        <result column="point" jdbcType="REAL" property="point"/>
+        <result column="rebound" jdbcType="REAL" property="rebound"/>
+        <result column="assist" jdbcType="REAL" property="assist"/>
+        <result column="steal" jdbcType="REAL" property="steal"/>
+        <result column="block" jdbcType="REAL" property="block"/>
+        <result column="fault" jdbcType="REAL" property="fault"/>
+        <result column="accuracy" jdbcType="REAL" property="accuracy"/>
+        <result column="playing time" jdbcType="REAL" property="playingTime"/>
+        <result column="pic_path" jdbcType="VARCHAR" property="picPath"/>
+    </resultMap>
+
+
+    <update id="savePlayerRecord" parameterType="com.example.nba.model.PlayerRecord">
+ insert into player_record (record_id, name_ch, player_rank,
+      point, rebound, assist, steal,
+      block, fault, accuracy, `playing time`,
+      pic_path)
+    values (#{recordId,jdbcType=INTEGER}, #{nameCh,jdbcType=VARCHAR}, #{playerRank,jdbcType=INTEGER},
+      #{point,jdbcType=REAL}, #{rebound,jdbcType=REAL}, #{assist,jdbcType=REAL}, #{steal,jdbcType=REAL},
+      #{block,jdbcType=REAL}, #{fault,jdbcType=REAL}, #{accuracy,jdbcType=REAL}, #{playingTime,jdbcType=REAL},
+      #{picPath,jdbcType=VARCHAR})
+  </update>
+    <select id="getByCondition" resultMap="BaseResultMap" parameterType="map">
+        select * from player_record
+
+    </select>
+</mapper>

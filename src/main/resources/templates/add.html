@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <script src="../static/js/jquery-3.2.1.js" th:src="@{/js/jquery-3.2.1.js}"></script>
+
+</head>
+<body>
+
+
+<div class="layui-body">
+    <ul class="layui-nav">
+        <li class="layui-nav-item">
+            <a href="">添加球员</a>
+        </li>
+
+    </ul>
+
+
+    <div class="layui-form-item">
+        <label class="layui-form-label">球员编号</label>
+        <div class="layui-input-block">
+            <input type="text" name="playerId" required lay-verify="required" placeholder="球员编号24000以上数字"
+                   autocomplete="off" class="layui-input">
+        </div>
+    </div>
+    <div class="layui-form-item">
+        <label class="layui-form-label">英文名称</label>
+        <div class="layui-input-block">
+            <input type="text" name="nameEn" required lay-verify="required" placeholder="英文名称"
+                   autocomplete="off" class="layui-input">
+        </div>
+    </div>
+    <div class="layui-form-item">
+        <label class="layui-form-label">中文名称</label>
+        <div class="layui-input-block">
+            <input type="text" name="nameCh" required lay-verify="required" placeholder="中文名称" autocomplete="off"
+                   class="layui-input">
+        </div>
+    </div>
+
+
+    <div class="layui-form-item">
+        <label class="layui-form-label">球员身高</label>
+        <div class="layui-input-block">
+            <input type="text" name="height" required lay-verify="required" placeholder="请输入球员身高,如:1.89米"
+                   autocomplete="off" class="layui-input">
+        </div>
+    </div>
+    <div class="layui-form-item">
+        <label class="layui-form-label">球员体重</label>
+        <div class="layui-input-block">
+            <input type="text" name="weight" required lay-verify="required" placeholder="请输入球员体重,如109.35kg"
+                   autocomplete="off" class="layui-input">
+        </div>
+    </div>
+    <div class="layui-form-item">
+        <label class="layui-form-label">球员球龄</label>
+        <div class="layui-input-block">
+            <input type="text" name="bollYear" required lay-verify="required" placeholder="请输入球员球龄,如3"
+                   autocomplete="off" class="layui-input">
+        </div>
+    </div>
+    <div class="layui-form-item">
+        <label class="layui-form-label">球员国籍</label>
+        <div class="layui-input-block">
+            <input type="text" name="nationality" required lay-verify="required" placeholder="请输入球员国籍"
+                   autocomplete="off" class="layui-input">
+        </div>
+    </div>
+    <div class="layui-form-item">
+        <label class="layui-form-label">球员战绩</label>
+        <div class="layui-input-block">
+            <input type="text" name="playerRecordId" required lay-verify="required"
+                   placeholder="请输入球员战绩ID,24000以上数字" autocomplete="off" class="layui-input">
+        </div>
+    </div>
+
+    <div class="layui-form-item">
+        <label class="layui-form-label">选择角色</label>
+        <div class="layui-input-block">
+            <select name="playerRole" lay-verify="required">
+                <option value=""></option>
+                <!--playerRoleList后台获取到的集合th:each进行遍历,playerRole作为集合对象的变量名称,th:value="${playerRole.id}作为value值
+                th:text="${playerRole.name}"作为需要显示的内容-->
+                <option th:each="playerRole:${playerRoleList}" th:value="${playerRole.id}"
+                        th:text="${playerRole.name}"></option>
+
+            </select>
+        </div>
+    </div>
+    <div class="layui-form-item">
+        <label class="layui-form-label">选择球队</label>
+        <div class="layui-input-block">
+            <select name="teamId" lay-verify="required">
+                <option value=""></option>
+                <option th:each="team:${teamList}" th:value="${team.id}" th:text="${team.teamNameCh}"></option>
+            </select>
+        </div>
+    </div>
+
+
+    <div class="layui-form-item">
+        <div class="layui-input-block">
+            <button class="layui-btn" lay-submit lay-filter="formDemo" type="submit" id="sub">立即提交</button>
+            <button type="reset" class="layui-btn layui-btn-primary">重置</button>
+        </div>
+    </div>
+
+
+</div>
+
+
+<script>
+    $(document).ready(function () {
+
+
+
+        var $formArea =$(".layui-body").find(":input");//获取所有表单区域所有表单元素
+
+
+        $("#sub").click(function () {
+            var myjson=$formArea.serializeArray();//序列化为传参形式
+            var jsonString=$.param(myjson);//改成字符串形式
+
+            $.post("http://localhost:8080/sys/data/PlayerInfo/ajaxadd",jsonString,"JSON")
+
+        })
+
+
+    })
+
+</script>
+</body>
+
+</html>

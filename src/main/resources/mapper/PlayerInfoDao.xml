@@ -1,0 +1,85 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.example.nba.dao.PlayerInfoDao">
+    <resultMap id="BaseResultMap" type="com.example.nba.model.PlayerInfo">
+        <id column="id" jdbcType="INTEGER" property="id"/>
+        <result column="player_id" jdbcType="INTEGER" property="playerId"/>
+        <result column="name_en" jdbcType="VARCHAR" property="nameEn"/>
+        <result column="name_ch" jdbcType="VARCHAR" property="nameCh"/>
+        <result column="team_id" jdbcType="VARCHAR" property="teamId"/>
+        <result column="player_role" jdbcType="VARCHAR" property="playerRole"/>
+        <result column="height" jdbcType="VARCHAR" property="height"/>
+        <result column="weight" jdbcType="VARCHAR" property="weight"/>
+        <result column="boll_year" jdbcType="INTEGER" property="bollYear"/>
+        <result column="nationality" jdbcType="VARCHAR" property="nationality"/>
+        <result column="player_record_id" jdbcType="INTEGER" property="playerRecordId"/>
+    </resultMap>
+    <!--三表联查(起别名映射,不管数据类型,因为这是结果集,而不是标准实体)-->
+    <!--SELECT a.player_id,a.name_ch,a.height,a.weight,a.boll_year,a.nationality,b.`name` as role_name,c.team_name_ch as team_name FROM player_info a,player_role b,team c WHERE a.team_id=c.id and a.player_role=b.id AND a.team_id=c.team_id-->
+    <resultMap id="BaseResultMap2" type="com.example.nba.model.PlayerInfo">
+        <id column="id" jdbcType="INTEGER" property="id"/>
+        <result column="player_id" jdbcType="INTEGER" property="playerId"/>
+        <result column="name_en" jdbcType="VARCHAR" property="nameEn"/>
+        <result column="name_ch" jdbcType="VARCHAR" property="nameCh"/>
+        <!--手动映射球队ID,把球队名称显示,不再显示数字,设计的时候直接使用String类型的方便,以免增加字段-->
+        <result column="team_name" jdbcType="VARCHAR" property="teamId"/>
+        <!--同上的道理-->
+        <result column="role_name" jdbcType="VARCHAR" property="playerRole"/>
+
+        <result column="height" jdbcType="VARCHAR" property="height"/>
+        <result column="weight" jdbcType="VARCHAR" property="weight"/>
+        <result column="boll_year" jdbcType="INTEGER" property="bollYear"/>
+        <result column="nationality" jdbcType="VARCHAR" property="nationality"/>
+        <result column="player_record_id" jdbcType="INTEGER" property="playerRecordId"/>
+    </resultMap>
+
+    <insert id="savePlayerInfo" keyColumn="id" keyProperty="id" parameterType="com.example.nba.model.PlayerInfo"
+            useGeneratedKeys="true">
+ insert into player_info (player_id, name_en, name_ch,
+      team_id, player_role, height,
+      weight, boll_year, nationality,
+      player_record_id)
+    values (#{playerId,jdbcType=INTEGER}, #{nameEn,jdbcType=VARCHAR}, #{nameCh,jdbcType=VARCHAR},
+      #{teamId,jdbcType=INTEGER}, #{playerRole,jdbcType=INTEGER}, #{height,jdbcType=VARCHAR},
+      #{weight,jdbcType=VARCHAR}, #{bollYear,jdbcType=INTEGER}, #{nationality,jdbcType=VARCHAR},
+      #{playerRecordId,jdbcType=INTEGER})
+  </insert>
+    <!--根据ID删除-->
+    <delete id="deleteById">
+DELETE FROM player_info WHERE id=#{id}
+    </delete>
+
+    <select id="getPlayerInfoByCondition" resultMap="BaseResultMap2" parameterType="map">
+        SELECT a.*,b.`name` as role_name,c.team_name_ch as team_name FROM player_info a,player_role b,team c
+        <where>
+            a.team_id=c.id and a.player_role=b.id AND a.team_id=c.team_id
+            <if test="nameCh!=null and nameCh!=''">
+                -- 注意左边的是数据库的,右边的是获取参数的形式,是传入的(map的key),推荐入参和数据库字段一致,可以提高效率
+                and name_ch=#{nameCh}
+            </if>
+            <if test="startPage!=null and pageSize!=null">
+                limit #{startPage} ,#{pageSize}
+            </if>
+            <if test="id!=null">
+               and a.id=#{id}
+            </if>
+        </where>
+    </select>
+    <!--通过ID修改-->
+    <update id="updateById" parameterType="com.example.nba.model.PlayerInfo">
+    update player_info
+    set player_id = #{playerId,jdbcType=INTEGER},
+      name_en = #{nameEn,jdbcType=VARCHAR},
+      name_ch = #{nameCh,jdbcType=VARCHAR},
+      team_id = #{teamId,jdbcType=VARCHAR},
+      player_role = #{playerRole,jdbcType=VARCHAR},
+      height = #{height,jdbcType=VARCHAR},
+      weight = #{weight,jdbcType=VARCHAR},
+      boll_year = #{bollYear,jdbcType=INTEGER},
+      nationality = #{nationality,jdbcType=VARCHAR},
+      player_record_id = #{playerRecordId,jdbcType=INTEGER}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+
+
+</mapper>

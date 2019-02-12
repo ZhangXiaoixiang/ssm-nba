@@ -1,0 +1,225 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.w3.org/1999/xhtml" xmlns:width="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <title>NBA后台数据管理</title>
+
+    <link rel="shortcut icon" href="../static/images/admin.jpg" th:href="@{/images/admin.jpg}"/>
+    <!--<link rel="stylesheet" href="../static/css/layui.css">-->
+    <link rel="stylesheet" href="../static/css/layui.css" th:href="@{/css/layui.css}">
+
+
+</head>
+<body class="layui-layout-body">
+
+<div class="layui-layout layui-layout-admin">
+    <div class="layui-header">
+        <div class="layui-logo">NBA数据管理中心</div>
+        <!-- 头部区域（可配合layui已有的水平导航） -->
+        <ul class="layui-nav layui-layout-left">
+            <li class="layui-nav-item"><a href="">控制台</a></li>
+            <li class="layui-nav-item"><a href="">商品管理</a></li>
+            <li class="layui-nav-item"><a href="">用户</a></li>
+            <li class="layui-nav-item">
+                <a href="javascript:;">其它系统</a>
+                <dl class="layui-nav-child">
+                    <dd><a href="">邮件管理</a></dd>
+                    <dd><a href="">消息管理</a></dd>
+                    <dd><a href="">授权管理</a></dd>
+                </dl>
+            </li>
+
+        </ul>
+        <ul class="layui-nav layui-layout-right">
+            <li class="layui-nav-item">
+                <a href="javascript:;">
+                    <img src="../static/images/admin.jpg" class="layui-nav-img" th:src="@{/images/admin.jpg}">
+                    张晓祥
+                </a>
+                <dl class="layui-nav-child">
+                    <dd><a href="">基本资料</a></dd>
+                    <dd><a href="">安全设置</a></dd>
+                </dl>
+            </li>
+            <li class="layui-nav-item"><a href="">退了</a></li>
+        </ul>
+    </div>
+
+    <div class="layui-side layui-bg-black">
+        <div class="layui-side-scroll">
+            <!-- 左侧导航区域（可配合layui已有的垂直导航） -->
+            <ul class="layui-nav layui-nav-tree" lay-filter="test">
+                <li class="layui-nav-item layui-nav-itemed">
+                    <a class="" href="javascript:;">数据管理</a>
+                    <dl class="layui-nav-child">
+                        <dd><a href="javascript:;">球员管理</a></dd>
+                        <dd><a href="javascript:;">球队管理</a></dd>
+                        <dd><a href="javascript:;">新闻管理</a></dd>
+                        <dd><a href="">NBA官方周边产品</a></dd>
+                    </dl>
+                </li>
+                <li class="layui-nav-item">
+                    <a href="javascript:;">用户管理</a>
+                    <dl class="layui-nav-child">
+                        <dd><a href="javascript:;">新增用户</a></dd>
+                        <dd><a href="javascript:;">用户数据</a></dd>
+                        <dd><a href="">权限管理</a></dd>
+                    </dl>
+                </li>
+                <li class="layui-nav-item"><a href="">球迷频道</a></li>
+                <li class="layui-nav-item"><a href="">彩迷频道</a></li>
+            </ul>
+        </div>
+    </div>
+    <!-- 内容主体区域 -->
+    <div class="layui-body">
+        <ul class="layui-nav">
+            <li class="layui-nav-item">
+                <a href="">修改球员</a>
+            </li>
+
+        </ul>
+        <form class="layui-form" action="../../page/PlayerInfo/update" method="post">
+            <!--携带ID隐含域,不能修改ID-->
+            <div class="layui-form-item">
+                <div class="layui-input-block">
+                    <input type="hidden" name="id" required lay-verify="required"
+                           autocomplete="off" class="layui-input" th:value="${playerInfo.id}">
+                </div>
+            </div>
+
+            <div class="layui-form-item">
+                <label class="layui-form-label">球员编号</label>
+                <div class="layui-input-block">
+                    <input type="text" name="playerId" required lay-verify="required"
+                           autocomplete="off" class="layui-input " th:value="${playerInfo.playerId}" >
+                </div>
+            </div>
+            <div class="layui-form-item">
+                <label class="layui-form-label">英文名称</label>
+                <div class="layui-input-block">
+                    <input type="text" name="nameEn" required lay-verify="required"
+                           autocomplete="off" class="layui-input" th:value="${playerInfo.nameEn}">
+                </div>
+            </div>
+            <div class="layui-form-item">
+                <label class="layui-form-label">中文名称</label>
+                <div class="layui-input-block">
+                    <input type="text" name="nameCh" required lay-verify="required" autocomplete="off"
+                           class="layui-input" th:value="${playerInfo.nameCh}">
+                </div>
+            </div>
+
+
+            <div class="layui-form-item">
+                <label class="layui-form-label">球员身高</label>
+                <div class="layui-input-block">
+                    <input type="text" name="height" required lay-verify="required"
+                           autocomplete="off" class="layui-input" th:value="${playerInfo.height}">
+                </div>
+            </div>
+            <div class="layui-form-item">
+                <label class="layui-form-label">球员体重</label>
+                <div class="layui-input-block">
+                    <input type="text" name="weight" required lay-verify="required"
+                           autocomplete="off" class="layui-input" th:value="${playerInfo.weight}">
+                </div>
+            </div>
+            <div class="layui-form-item">
+                <label class="layui-form-label">球员球龄</label>
+                <div class="layui-input-block">
+                    <input type="text" name="bollYear" required lay-verify="required"
+                           autocomplete="off" class="layui-input" th:value="${playerInfo.bollYear}">
+                </div>
+            </div>
+            <div class="layui-form-item">
+                <label class="layui-form-label">球员国籍</label>
+                <div class="layui-input-block">
+                    <input type="text" name="nationality" required lay-verify="required"
+                           autocomplete="off" class="layui-input" th:value="${playerInfo.nationality}">
+                </div>
+            </div>
+            <div class="layui-form-item">
+                <label class="layui-form-label">球员战绩</label>
+                <div class="layui-input-block">
+                    <input type="text" name="playerRecordId" required lay-verify="required"
+                           autocomplete="off" class="layui-input" th:value="${playerInfo.playerRecordId}">
+                </div>
+            </div>
+
+            <div class="layui-form-item">
+                <label class="layui-form-label">选择角色</label>
+                <div class="layui-input-block">
+                    <!--th:field="*{playerInfo.playerRole}" playerInfo表示球员实体,playerRole球员实体的属性,
+                    比如 playerRole获得的是2(1:对应前锋,2:中锋,3:后卫),那么就显示中锋,*代表所有的都会匹配显示-->
+                    <select name="playerRole" lay-verify="required" th:field="*{playerInfo.playerRole}">
+                       <option value=""></option>
+                        <!--playerRoleList后台获取到的集合
+                        th:each="playerRole:${playerRoleList}"  遍历的写法,相当于foreach,playerRole表示变量(实体),${playerRoleList}表示需要遍历的集合
+                        th:value="${playerRole.id}作为value值    ${playerRole.id}球员角色ID作为value值
+                        th:text="${playerRole.name}"            作为下拉框需要显示的内容
+                        th:each="playerRole:${playerRoleList}"-->
+                        <option th:each="playerRole:${playerRoleList}"
+                                th:value="${playerRole.id}"
+                                th:text="${playerRole.name}"
+                                ></option>
+                    </select>
+                </div>
+            </div>
+
+            <div class="layui-form-item">
+                <label class="layui-form-label">选择球队</label>
+                <div class="layui-input-block">
+                    <select name="Team" lay-verify="required" th:field="*{playerInfo.teamId}">
+                        <!--<option value=""></option>-->
+                        <option th:each="team:${teamList}" th:text="${team.teamNameCh}"
+                                th:value="${team.teamId}"></option>
+                    </select>
+                </div>
+            </div>
+
+
+            <div class="layui-form-item">
+                <div class="layui-input-block">
+                    <button class="layui-btn" lay-submit lay-filter="formDemo" type="submit">立即提交</button>
+                    <button type="reset" class="layui-btn layui-btn-primary">重置</button>
+                </div>
+            </div>
+        </form>
+
+
+    </div>
+
+</div>
+
+
+</body>
+
+<script src="../static/layui.js" th:src="@{/layui.js}"></script>
+
+
+<script>
+    //JavaScript代码区域
+    layui.use('element', function () {
+        var element = layui.element;
+
+    });
+
+</script>
+<script>
+    //Demo
+    layui.use('form', function () {
+        var form = layui.form;
+        //监听提交
+        form.on('submit(formDemo)', function (data) {
+            layer.msg(JSON.stringify(data.field));
+
+            // return false;
+        });
+    });
+</script>
+
+</html>
