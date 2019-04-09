@@ -38,8 +38,9 @@ public class LoginInterceptor implements HandlerInterceptor {
         }
         System.out.println("和数据库数据不一致,请重新登录");
         System.out.println("-----------自定义拦截器------------拦截住了----------");
-        PrintWriter printWriter = response.getWriter();
-        response.setCharacterEncoding("UTF-8");
+        response.setCharacterEncoding("UTF-8");//解决???编码形式乱码
+        response.setContentType("text/html;charset=utf-8");// 解决printWriter.write就不会乱码了,鏃堕棿杩囨湡,璇烽噸鏂扮櫥褰乱码
+        PrintWriter printWriter = response.getWriter();//主要修改了编码之后再获取流对象
         printWriter.write("please login again! session时间过期,请重新登录 http://localhost:8080/page/user/login");
         return false;
     }
